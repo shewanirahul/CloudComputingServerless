@@ -1,0 +1,82 @@
+<style>
+    table, th, td {
+    padding: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    }
+</style>
+
+<div class="default-page">
+    <div class="header">
+      <h1 id="main-title" class="container"><%= __(' View Part Orders') %></h1>
+      <h3 class="container"> <code>Company X</code></h3>
+    </div>
+    <br>
+    <div class="main container clearfix">
+
+        <div>
+            <h2> Search Part Orders </h2>
+            <br>
+            <br>
+            <form action="/searchPartOrders" method="POST">
+            <label for="PartId566">Job Name: </label>
+            <select name="jobName" id="PartId566">
+                <option value="" > </option>
+                <% options.forEach(function(option){ %>
+                    <option value=<%= option.jobName %> ><%= option.jobName %> </option>
+                
+                <% }) %>
+              </select>
+            <button class="button"> Search </button>
+            </form>
+           <br>
+           </form>
+           <br>
+           <hr>
+           
+           <br>
+           </div>
+
+<body>
+    <h2>  </h2>
+    <br>
+    <table>
+    <thead>
+    <tr>
+    <th> Job Name </th>
+    <th> Part Id </th>
+    <th> User Id </th>
+    <th> Quantity </th>
+    </tr>
+    </thead>
+    <tbody class="tbodys">
+    <% parts.forEach(function(part){ %>
+        
+    <tr>
+    <td> <%= part.jobName %> </td>
+    <td><%= part.partId %> </td>
+    <td> <%= part.userId %> </td> 
+    <td> <%= part.qty %> </td>
+    </tr>
+    
+
+    <% }) %>
+    </tbody>
+    </table>
+   </body>
+   <br>
+   <form action="/">
+    <button  class="button"> Home </button>
+   </form>
+   <br>
+   <form action="/getPartsViewForUpdate566">
+    <button class="button"> Add <span class="spanOr">|</span> View <span class="spanOr">|</span> Update Parts </button>
+    </form>
+   <br>
+   <form action="/getPartsView566">
+    <button  class="button"> Add <span class="spanOr">|</span> View <span class="spanOr">|</span>  Delete Jobs </button>
+    </form>
+   <br>
+</div>
+</div>
+   

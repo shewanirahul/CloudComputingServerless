@@ -1,0 +1,93 @@
+<style>
+    table, th, td {
+    padding: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    }
+   </style>
+
+<div class="default-page">
+    <div class="header">
+      <h1 id="main-title" class="container"><%= __(' View and Update Job Details') %></h1>
+      <h3 class="container"> <code>Company X</code></h3>
+    </div>
+    <br>
+    <div class="main container clearfix">
+    
+
+
+
+
+<div>
+    <h2> Add Job </h2>
+    <form action="/postPartsView566" method="POST">
+    <input type="text", name="id", placeholder="Job Id", required>
+    <!-- <input type="number", name="PartId566", placeholder="Part Id", required> -->
+
+    <select name="PartId566" id="PartId566">
+        
+        <% options.forEach(function(option){ %>
+            <option value=<%= option.partId %> ><%= option.partId %> </option>
+        
+        <% }) %>
+      </select>
+      
+
+    
+
+    <input type="number", name="Quantity566", placeholder="Quantity", required>
+    <input type="number" name="isUpdate" placeholder="Quantity" hidden value=1>
+    <button class="button"> Add Job </button>
+    </form>
+   <br>
+   </form>
+   <br>
+   <hr>
+   
+   <br>
+   </div>
+
+<body>
+    <h2> View and Update Job Details </h2>
+    <br>
+    <table>
+    <thead>
+    <tr>
+    <th> Job Id </th>
+    <th> Part Id </th>
+    <th> Quantity </th>
+    <th> New Quantity </th>
+    <th> Update </th>
+    </tr>
+    </thead>
+    <tbody class="tbodys">
+    <% parts.forEach(function(part){ %>
+        <form action="/putPartsView566" method="POST">
+    <tr>
+    <td><input type="text" name="jobId566" placeholder="Job Id" value=<%= part.jobName %>  hidden> <%= part.jobName %> </td>
+    <td><input type="number" name="partId566" placeholder="Job Id" value=<%= part.partId %> hidden> <%= part.partId %> </td>
+    <td> <%= part.qty %> </td>
+    <td><input type="number" name="quantity566" placeholder="Quantity" required> </td>
+    <td><button class="button button4"> Update Job </button></td>
+    </tr>
+    
+</form>
+    <% }) %>
+    </tbody>
+    </table>
+   </body>
+   <br>
+   <form action="/">
+    <button  class="button"> Home </button>
+   </form>
+   <br>
+   <form action="/getPartsView566">
+    <button  class="button"> Add <span class="spanOr">|</span> View <span class="spanOr">|</span>  Delete Jobs </button>
+    </form>
+   <br>
+   <form action="/getPartordersView">
+    <button class="button"> View Part Orders </button>
+    </form>
+</div>
+</div>
+   
