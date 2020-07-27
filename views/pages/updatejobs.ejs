@@ -1,0 +1,80 @@
+<style>
+    table, th, td {
+    padding: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    }
+</style>
+
+<div class="default-page">
+    <div class="header">
+      <h1 id="main-title" class="container"><%= __(' View and Update Part Details') %></h1>
+      <h3 class="container"> <code>Company Y</code></h3>
+    </div>
+    <br>
+    <div class="main container clearfix">
+    
+
+
+
+
+<div>
+    <h2> Add Part </h2>
+    <form action="/postPartsView566" method="POST">
+    <input type="number", name="partId", placeholder="Part Id", required>
+    <input type="text", name="partName", placeholder="Part Name", required>
+    <input type="number", name="qoh", placeholder="qoh", required>
+    <input type="number" name="isUpdate" placeholder="qoh" hidden value=1>
+    <button class="button"> Add Part </button>
+    </form>
+   <br>
+   </form>
+   <br>
+   <hr>
+   
+   <br>
+   </div>
+
+<body>
+    <h2> View and Update Part Details </h2>
+    <br>
+    <table>
+    <thead>
+    <tr>
+    <th> Parts Id </th>
+    <th> Parts Name </th>
+    <th> Quantity </th>
+    <th> New Part Name </th>
+    <th> New Quantity </th>
+    <th> Update </th>
+    </tr>
+    </thead>
+    <tbody class="tbodys">
+    <% parts.forEach(function(part){ %>
+        <form action="/putPartsView566" method="POST">
+    <tr>
+    <td><input type="number" name="partId" placeholder="Job Id" value=<%= part.partId %>  hidden> <%= part.partId %> </td>
+    <td><input type="text" name="partsnameOld" placeholder="Job Id" value=<%= part.partName %> hidden> <%= part.partName %> </td>
+    <td> <input type="text" name="quantityOld" placeholder="Job Id" value=<%= part.qoh %> hidden> <%= part.qoh %> </td>
+    <td><input type="text" name="partsname" placeholder="Part Name" > </td>
+    <td><input type="number" name="quantity" placeholder="Quantity" > </td>
+    <td><button class="button button4"> Update Part </button></td>
+    </tr>
+    
+</form>
+    <% }) %>
+    </tbody>
+    </table>
+   </body>
+   <br>
+   <form action="/">
+    <button  class="button"> Home </button>
+   </form>
+   <br>
+   <form action="/getPartordersView">
+    <button class="button"> View Part Orders </button>
+    </form>
+   <br>
+</div>
+</div>
+   
