@@ -1,4 +1,5 @@
 const express = require("express");
+const jwt = require('jsonwebtoken');
 var cors = require("cors");
 const mysql = require("mysql");
 var http = require('http');
@@ -64,8 +65,18 @@ app.get("/companyz/users/:username/:password", (req, res) => {
       );
       //res.send("success")  ;
     } else {
-    console.log(result);
-      res.send(result[0]);
+      jwt.sign({result}, 'secretkey',{ expiresIn: '30s' }, (err, token) => {
+        
+        let resultStr={
+          uerId: result[0].uerId,
+          username:result[0].username,
+          password:result[0].password,
+          token:token 
+        }
+        res.json({
+          resultStr
+        })
+      })
     }
   });
 });
@@ -111,7 +122,12 @@ app.post("/companyz/insertSearch", jsonParser, (req, res) => {
   });
 });
 
- app.post('/companyz/book',jsonParser,(req,res)=>{
+app.post('/companyz/book', verifyToken, jsonParser,(req, res) => { 
+  jwt.verify(req.token, 'secretkey', (err, authData) => {
+    if(err) {
+      res.send(403);
+    } 
+    else {
   let reqObject = req.body;
   let userId = reqObject.userId;
   let partsToBeBooked = reqObject.partsToBook;
@@ -271,7 +287,24 @@ app.post("/companyz/insertSearch", jsonParser, (req, res) => {
       }
     }
   );
-  //end
+    }
+  });
+  
 });
+// Get auth header value, split the bearer value and store the token in an array
+function verifyToken(req, res, next) {
+  
+  const bearerHeader = req.headers['authorization'];
+  if(typeof bearerHeader !== 'undefined') {
+    const bearer = bearerHeader.split(' ');
+    const bearerToken = bearer[1];
+    req.token = bearerToken;
+    next();
+  } 
+  else {
+    // Forbidden
+    res.sendStatus(403);
+  }
 
+}
 app.listen(3000, () => console.log("listening on port...." + 3000));
