@@ -44,19 +44,19 @@ export default class ApplyExit extends Component {
     console.log("Username" + username);
     console.log("Username" + password);
     fetch(
-      `http://cloud6a-env.eba-t7ffpjmv.us-east-1.elasticbeanstalk.com/companyz/users/${username}/${password}`
+      `http://cloud7-env.eba-mm3kp2rp.us-east-1.elasticbeanstalk.com/companyz/users/${username}/${password}`
     )
       .then((r) => r.json())
       .then((response) => {
-        console.log("Line 12" + response.uerId);
-        if (!response.uerId) {
+        console.log("Line 12" + response.resultStr.uerId);
+        if (!response.resultStr.uerId) {
           console.log("Failure");
           localStorage.setItem("logInResults", "failure");
           alert("Invalid Credentials");
         } else {
-          console.log("TResult of response   " + response.uerId);
-
-          localStorage.setItem("user", response.uerId);
+          console.log("TResult of response   " + response.resultStr.uerId);
+          localStorage.setItem("token", response.resultStr.token);
+          localStorage.setItem("user", response.resultStr.uerId);
           this.props.history.push("/afterLogin");
         }
       });

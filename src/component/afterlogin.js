@@ -5,31 +5,38 @@ export class afterlogin extends React.Component {
   printUser() {
     console.log("Called print user");
     let userID = localStorage.getItem("user");
+    let token =localStorage.getItem("token");
 
     var jobDetailsArr = JSON.parse(localStorage.getItem("jobDetails"));
 
     console.log("Job Details Array: " + jobDetailsArr);
     console.log("User name-->" + userID);
-
     var json = {};
     json.userId = userID;
     json.partsToBook = jobDetailsArr;
 
     console.log(json);
-
+    console.log("Bearer "+token);
     fetch(
-      "http://cloud6a-env.eba-t7ffpjmv.us-east-1.elasticbeanstalk.com/companyz/book",
+      "http://cloud7-env.eba-mm3kp2rp.us-east-1.elasticbeanstalk.com/companyz/book",
       {
         method: "POST",
-        headers: { "Content-type": "application/json" },
+        headers: { "Content-type": "application/json" ,
+        Authorization : "Bearer "+token},
         body: JSON.stringify(json),
       }
     ).then((res) => {
       if (res) {
         if (res.status == 200) {
           this.props.history.push("/bookSuccess");
-        } else {
+        } else if(res.status== 403)
+          {
+           window.alert("403 : Forbidden, User not authorized")
+           this.props.history.push("/login");
+        }
+          else{
           this.props.history.push("/bookFailure");
+
         }
       }
     });
