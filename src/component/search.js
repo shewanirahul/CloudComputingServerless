@@ -11,7 +11,8 @@ class search extends Component {
   }
 
   componentDidMount() {
-    const url = "https://31u8etrzrf.execute-api.us-east-1.amazonaws.com/Test/getjobsparts";
+    const url =
+      "https://31u8etrzrf.execute-api.us-east-1.amazonaws.com/Test/getjobsparts";
 
     fetch(url)
       .then((res) => res.json())
@@ -90,7 +91,7 @@ class search extends Component {
       jobName: this.refs.job.value,
     };
     fetch(
-      "http://cloud6a-env.eba-t7ffpjmv.us-east-1.elasticbeanstalk.com/companyz/insertSearch",
+      "http://cloud7-env.eba-mm3kp2rp.us-east-1.elasticbeanstalk.com/companyz/insertSearch",
       {
         method: "POST",
         headers: { "Content-type": "application/json" },
