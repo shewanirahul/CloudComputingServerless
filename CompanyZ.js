@@ -63,9 +63,11 @@ app.get("/companyz/users/:username/:password", (req, res) => {
           req.params.password +
           " was not found"
       );
-      //res.send("success")  ;
+ 
     } else {
-      jwt.sign({result}, 'secretkey',{ expiresIn: '30s' }, (err, token) => {
+      // generate a secret key and set expiration time. 
+      //Pass the token along the user details 
+      jwt.sign({result}, 'secretkey', (err, token) => {
         
         let resultStr={
           uerId: result[0].uerId,
@@ -123,7 +125,9 @@ app.post("/companyz/insertSearch", jsonParser, (req, res) => {
 });
 
 app.post('/companyz/book', verifyToken, jsonParser,(req, res) => { 
-  jwt.verify(req.token, 'secretkey', (err, authData) => {
+  
+  //to verify the token sent in the request body
+  jwt.verify(req.token, 'secretkey', (err) => {
     if(err) {
       res.send(403);
     } 
