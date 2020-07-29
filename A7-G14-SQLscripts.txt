@@ -1,0 +1,57 @@
+---------------------------------------------------------------------------------------
+Table JobParts 
+
+
+CREATE TABLE IF NOT EXISTS `JobParts` (
+`partId` int NOT NULL ,
+`jobName` varchar(25) NOT NULL,
+`userId` varchar(25) NOT NULL,
+`qty` int,
+`date` date,
+`time` time,
+`result` ENUM('Success','Failed'),
+PRIMARY KEY(`partId`,`jobName`,`userId`)
+);
+
+
+INSERT INTO `JobParts` (`partId`,`jobName`,`userId`,`qty`,`date`,`time`,`result`) VALUES (1,'Job1','U1',200,'2020-06-30','08:00:00','Success');
+INSERT INTO `JobParts` (`partId`,`jobName`,`userId`,`qty`,`date`,`time`,`result`) VALUES (2,'Job1','U2',80,'2020-06-30','02:50:45','Failed');
+
+commit;
+---------------------------------------------------------------------------------------------
+
+Table Search
+
+CREATE TABLE IF NOT EXISTS `Search` (
+`userId` varchar(25) NOT NULL,
+`jobName` varchar(25) NOT NULL,
+`date` date,
+`time` time,
+
+PRIMARY KEY(`jobName`,`userId`)
+);
+
+
+INSERT INTO `Search` (`jobName`,`userId`,`date`,`time`) VALUES ('Job1','U1','2020-06-30','08:00:00');
+INSERT INTO `Search` (`jobName`,`userId`,`date`,`time`) VALUES ('Job1','U2','2020-06-30','02:50:45');
+
+commit;
+-------------------------------------------------------------------------------------------------
+Table Userlogin
+
+
+USE `Project-G14`;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+CREATE TABLE IF NOT EXISTS `Userlogin` (
+`uerId` varchar(100) NOT NULL,
+`username` varchar(100) NOT NULL ,
+`password` varchar(25),
+PRIMARY KEY(`uerId`)
+);
+
+INSERT INTO `Userlogin` (`uerId`,`username`,`password`) VALUES ('U1','Lavanya','lavanya');
+INSERT INTO `Userlogin` (`uerId`,`username`,`password`) VALUES ('U2','Prashant','prashant');
+INSERT INTO `Userlogin` (`uerId`,`username`,`password`) VALUES ('U3','Meeta','meeta');
+INSERT INTO `Userlogin` (`uerId`,`username`,`password`) VALUES ('U3','Rahul','rahul');
+
+---------------------------------------------------------------------------------------------------
